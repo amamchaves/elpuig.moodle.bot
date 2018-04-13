@@ -15,6 +15,7 @@ public class MoodleAPI {
 
         RAMDB.userTokens.put(telegramUsername, token);
 
+        // hola
         return 1;
     }
 
