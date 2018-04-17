@@ -25,7 +25,7 @@ public class NotesCommand extends BotCommand {
 
         messageBuilder.append("Llistat de notes ").append("\n");
 
-        Usuario usuario = Database.get().selectUsuarioPorTelegramName(user
+        Usuario usuario = Database.get().selectUsuarioPorTelegramName(user.getUserName());
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
