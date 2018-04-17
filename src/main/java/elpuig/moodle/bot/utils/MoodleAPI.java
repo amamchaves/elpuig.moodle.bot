@@ -16,12 +16,13 @@ public class MoodleAPI {
 
         Database.get().insertUsuario(username, token);
 
-        // hola
         return 1;
     }
 
-    //public static String[] getCourses(String telegramUsername){
+    /*
+    public static String[] getCourses(String telegramUsername){
+    }
 
+    */
 
-    //}
 }
