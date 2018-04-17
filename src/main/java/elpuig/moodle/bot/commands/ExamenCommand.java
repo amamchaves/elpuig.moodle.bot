@@ -1,5 +1,6 @@
 package elpuig.moodle.bot.commands;
 
+import elpuig.moodle.bot.Missatges;
 import elpuig.moodle.bot.services.Menus;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
@@ -21,7 +22,7 @@ public class ExamenCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Tria de quina assignatura vols veure l'examen ").append("\n");
+        messageBuilder.append(Missatges.triaAsignatura).append("\n");
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM());
