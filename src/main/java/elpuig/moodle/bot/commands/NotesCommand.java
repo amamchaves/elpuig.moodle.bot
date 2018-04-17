@@ -1,6 +1,8 @@
 package elpuig.moodle.bot.commands;
 
+import elpuig.moodle.bot.Usuario;
 import elpuig.moodle.bot.services.Menus;
+import elpuig.moodle.bot.utils.Database;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
@@ -23,6 +25,7 @@ public class NotesCommand extends BotCommand {
 
         messageBuilder.append("Llistat de notes ").append("\n");
 
+        Usuario usuario = Database.get().selectUsuarioPorTelegramName(user
 
 
         SendMessage answer = new SendMessage();

@@ -2,6 +2,7 @@
   <library name="Gradle: org.telegram:telegrambotsextensions:3.6">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.telegram/telegrambotsextensions/3.6/b416b939ff62c354ad25aa017bbb581f07d830d3/telegrambotsextensions-3.6.jar!/" />
+      <root url="jar://$USER_HOME$/Baixades/sqlite-jdbc-3.21.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
