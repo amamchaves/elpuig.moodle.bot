@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class Database {
     static final String url = "jdbc:sqlite:database.db";
-    static final int DATABASE_VERSION = 5;
+    static final int DATABASE_VERSION = 6;
 
     static Database instance;
     static Connection conn;
@@ -66,18 +66,20 @@ public class Database {
 
     void createTables(){
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramName text, token text);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramName text, token text, email text, id text);");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void insertUsuario(String nombre, String token) {
-        String sql = "INSERT INTO usuarios(nombre, token) VALUES(?,?)";
+    public void insertUsuario(String nombre, String token, String email, String id) {
+        String sql = "INSERT INTO usuarios(nombre, token) VALUES(?,?,?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, token);
+            pstmt.setString(3, email);
+            pstmt.setString(4, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -97,7 +99,9 @@ public class Database {
             while (rs.next()) {
                 usuario.telegramUser = telegramName;
                 usuario.token = rs.getString("token");
-
+                usuario.email = rs.getString("email");
+                usuario.id = rs.getString("id");
+                usuario.username = rs.getString("username");
                 return usuario;
 
             }

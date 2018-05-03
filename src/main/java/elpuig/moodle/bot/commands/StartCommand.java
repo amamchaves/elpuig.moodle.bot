@@ -22,7 +22,7 @@ public class StartCommand extends BotCommand {
         // DatabaseManager databseManager = DatabaseManager.getInstance();
         StringBuilder messageBuilder = new StringBuilder();
 
-        String userName = user.getFirstName() + " " + user.getLastName();
+        String userName = user.getFirstName();// + " " + user.getLastName();
 
         //if (databseManager.getUserStateForCommandsBot(user.getId())) {
         messageBuilder.append("Benvingut "+userName).append("\n");
