@@ -29,10 +29,39 @@ public class MoodleAPI {
 
 
     /*
-    public static String[] getCourses(String telegramUsername){
+    public static String[] getCourses(String telegramUsername, String token){
 
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_course_get_courses&wstoken="+token+"&moodlewsrestformat=json");
+
+        JSONObject cursos = new JSONArray(response).getJSONObject(0);
+        String id_curs = cursos.getString("id");
+        String nom_curs = cursos.getString("fullname");
+
+        // return ;
     }
 
+    public static String[] getAssignatura(String telegramUsername, String token, String id){
+
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_enrol_get_users_courses&wstoken="+token+"&userid="+id+"&moodlewsrestformat=json");
+
+        JSONObject assignatura = new JSONArray(response).getJSONObject(0);
+        String id_assignatura = assignatura.getString("id");
+        String nom_assignatura = assignatura.getString("shortname");
+
+        // return ;
+    }
+
+    public static String[] getEntregues(String telegramUsername, String token, String id_assignatura){
+
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+token+"&courseids[0]="+id_assignatura+"&moodlewsrestformat=json");
+
+        JSONObject entregues = new JSONArray(response).getJSONObject(0).getJSONObject("assignments");
+        //String id_entrega = entregues.getString("id");
+        String nom_entrega = entregues.getString("name");
+
+        // return ;
+
+    }
     */
 
 }
