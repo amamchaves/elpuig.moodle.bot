@@ -121,7 +121,7 @@ public class Menus {
     }
 
     /* Crea el menu de buttons per escollir asignatures de DAM */
-    public static List<List<InlineKeyboardButton>> MenuInlineButtonsAssignaturesDAM(User user) {
+    public static List<List<InlineKeyboardButton>> MenuInlineButtonsAssignaturesDAM(String tipo, User user) {
         List<List<InlineKeyboardButton>> lkb = new ArrayList<>();
 
         List<Course> cursos = MoodleAPI.getCourses(user.getId());
@@ -130,7 +130,7 @@ public class Menus {
             List<InlineKeyboardButton> row = new ArrayList<>();
             row.add(new InlineKeyboardButton()
                     .setText(course.shortname)
-                    .setCallbackData(course.shortname));
+                    .setCallbackData(tipo + ":" + course.shortname));
             lkb.add(row);
         }
 //

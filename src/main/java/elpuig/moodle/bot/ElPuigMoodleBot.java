@@ -6,6 +6,8 @@ import elpuig.moodle.bot.services.Emoji;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.services.dataVars;
 
+import elpuig.moodle.bot.utils.MoodleAPI;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
@@ -97,17 +99,21 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                     case "Dimecres":    enviarResposta(answerPhoto, dataVars.HPDimecres); break;
                     case "Dijous":  enviarResposta(answerPhoto, dataVars.HPDijous); break;
                     case "Divendres":   enviarResposta(answerPhoto, dataVars.HPDivendres); break;
-                    case "SMX1A" :  enviarResposta(answerPhoto,dataVars.HSMX1A); break;
-                    case "SMX1B":   enviarResposta(answerPhoto,dataVars.HSMX1B); break;
-                    case "SMC1C":   enviarResposta(answerPhoto,dataVars.HSMX1C); break;
-                    case "SMX2A":   enviarResposta(answerPhoto,dataVars.HSMX2A); break;
-                    case "SMX2B":   enviarResposta(answerPhoto,dataVars.HSMX2B); break;
-                    case "SMX2C":   enviarResposta(answerPhoto,dataVars.HSMX2C); break;
-                    case "GS1B":    enviarResposta(answerPhoto,dataVars.HGS1B); break;
-                    case "GS1A":    enviarResposta(answerPhoto,dataVars.HGS1A); break;
-                    case "ASIX2":   enviarResposta(answerPhoto,dataVars.HASIX2A); break;
-                    case "DAM2A":   enviarResposta(answerPhoto,dataVars.HDAM2A); break;
-                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
+//                    case "SMX1A" :  enviarResposta(answerPhoto,dataVars.HSMX1A); break;
+//                    case "SMX1B":   enviarResposta(answerPhoto,dataVars.HSMX1B); break;
+//                    case "SMC1C":   enviarResposta(answerPhoto,dataVars.HSMX1C); break;
+//                    case "SMX2A":   enviarResposta(answerPhoto,dataVars.HSMX2A); break;
+//                    case "SMX2B":   enviarResposta(answerPhoto,dataVars.HSMX2B); break;
+//                    case "SMX2C":   enviarResposta(answerPhoto,dataVars.HSMX2C); break;
+//                    case "GS1B":    enviarResposta(answerPhoto,dataVars.HGS1B); break;
+//                    case "GS1A":    enviarResposta(answerPhoto,dataVars.HGS1A); break;
+//                    case "ASIX2":   enviarResposta(answerPhoto,dataVars.HASIX2A); break;
+//                    case "DAM2A":   enviarResposta(answerPhoto,dataVars.HDAM2A); break;
+//                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
+                    default:
+                        String[] partsTria = tria.split(":");
+                        //callbackQuery.getId();
+                        respondreText(answer, "estas las entregas ");
                 }
 
             }
@@ -154,6 +160,21 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
+        }
+
+        private void respondreText(SendMessage resp, String msg){
+            resp.setText(msg);
+            try {
+                sendMessage(resp);
+            } catch (TelegramApiException e) {
+                BotLogger.info(LOGTAG, e.getMessage());
+            }
 
         }
-    }
+        /*
+        String buildStringEntregues(String telegramId, String courseId){
+            MoodleAPI.getCourses(telegramId);
+            // generar string con todas las asignaturas
+
+        }*/
+}

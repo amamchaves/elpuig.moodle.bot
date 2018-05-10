@@ -64,6 +64,7 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-runtime:1.0.7" level="project" />
     <orderEntry type="library" name="Gradle: net.jcip:jcip-annotations:1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.grizzly:grizzly-framework:2.3.28" level="project" />
+    <orderEntry type="library" name="sqlite-jdbc-3.21.0" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="elpuig.moodle.bot_main" />
 </module>

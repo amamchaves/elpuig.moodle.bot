@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class Database {
     static final String url = "jdbc:sqlite:database.db";
-    static final int DATABASE_VERSION = 8;
+    static final int DATABASE_VERSION = 9;
 
     static Database instance;
     static Connection conn;
@@ -19,7 +19,7 @@ public class Database {
             try {
                 conn = DriverManager.getConnection(url);
             } catch (SQLException e) {
-                System.out.println("Connection FAILEDDDDDDD");
+                System.out.println("Connection FAILED");
                 System.out.println(e.getMessage());
             }
 
@@ -67,20 +67,21 @@ public class Database {
 
     void createTables(){
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramId text, token text, email text, id text);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramId text, username text, token text, email text, id text);");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void insertUsuario(int telegramId, String token, String email, String id) {
-        String sql = "INSERT INTO usuarios(telegramId, token, email, id) VALUES(?,?,?,?)";
+    public void insertUsuario(int telegramId, String username, String token, String email, String id) {
+        String sql = "INSERT INTO usuarios(telegramId, username, token, email, id) VALUES(?,?,?,?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, telegramId);
-            pstmt.setString(2, token);
-            pstmt.setString(3, email);
-            pstmt.setString(4, id);
+            pstmt.setString(2, username);
+            pstmt.setString(3, token);
+            pstmt.setString(4, email);
+            pstmt.setString(5, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

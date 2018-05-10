@@ -25,8 +25,7 @@ public class MoodleAPI {
         String email = jsonObject.getString("email");
         String id = String.valueOf(jsonObject.getInt("id"));
 
-
-        Database.get().insertUsuario(telegramId, token, email, id);
+        Database.get().insertUsuario(telegramId, username, token, email, id);
 
         return 1;
     }
@@ -67,7 +66,7 @@ public class MoodleAPI {
 
     }
 
-//    public static String[] getEntregues(String telegramUsername, String token, String id_assignatura){
+//    public static String[] getEntregues(id telegramId, String courseId){
 //
 //        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+token+"&courseids[0]="+id_assignatura+"&moodlewsrestformat=json");
 //

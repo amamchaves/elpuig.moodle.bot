@@ -39,6 +39,8 @@ public class LoginCommand extends BotCommand {
             }else if(arguments.length >= 2) {
 
                 // emmagatzema l'usuari
+                System.out.println(user.getUserName()+" "+user.getId());
+
                 int result = MoodleAPI.login(user.getId(), arguments[0], arguments[1]);
 
                 if(result == 1){

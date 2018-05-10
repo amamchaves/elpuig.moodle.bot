@@ -30,7 +30,7 @@ public class EntreguesCommand extends BotCommand {
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM(user));
+        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("entregues", user));
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
