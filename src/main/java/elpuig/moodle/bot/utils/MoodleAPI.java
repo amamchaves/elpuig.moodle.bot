@@ -5,7 +5,6 @@ import elpuig.moodle.bot.model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.DatagramSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class MoodleAPI {
 
     static String moodleUrl = "http://192.168.22.138/moodle/";
 
-    public static int login(String telegramUsername, String username, String password){
+    public static int login(int telegramId, String username, String password){
 
         String response = HttpUtils.get(moodleUrl + "login/token.php?username=" + username + "&password=" + password + "&service=moodle_mobile_app");
 
@@ -27,12 +26,10 @@ public class MoodleAPI {
         String id = String.valueOf(jsonObject.getInt("id"));
 
 
-        Database.get().insertUsuario(username, token, email, id);
+        Database.get().insertUsuario(telegramId, token, email, id);
 
         return 1;
     }
-
-
 
 //    public static String[] getCourses(String telegramUsername, String token){
 //
@@ -46,9 +43,9 @@ public class MoodleAPI {
 //        return ;
 //    }
 
-    public static List<Course> getCourses(String telegramUsername){
+    public static List<Course> getCourses(int telegramId){
 
-        Usuario usuario = Database.get().selectUsuarioPorTelegramName(telegramUsername);
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
 
         String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_enrol_get_users_courses&wstoken="+usuario.token+"&userid="+usuario.id+"&moodlewsrestformat=json");
 
@@ -65,7 +62,6 @@ public class MoodleAPI {
             courses.add(course);
 
         });
-
 
         return courses;
 

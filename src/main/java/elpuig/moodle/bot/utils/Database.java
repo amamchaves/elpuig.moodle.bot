@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class Database {
     static final String url = "jdbc:sqlite:database.db";
-    static final int DATABASE_VERSION = 7;
+    static final int DATABASE_VERSION = 8;
 
     static Database instance;
     static Connection conn;
@@ -67,17 +67,17 @@ public class Database {
 
     void createTables(){
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramName text, token text, email text, id text);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (telegramId text, token text, email text, id text);");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void insertUsuario(String nombre, String token, String email, String id) {
-        String sql = "INSERT INTO usuarios(telegramName, token, email, id) VALUES(?,?,?,?)";
+    public void insertUsuario(int telegramId, String token, String email, String id) {
+        String sql = "INSERT INTO usuarios(telegramId, token, email, id) VALUES(?,?,?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nombre);
+            pstmt.setInt(1, telegramId);
             pstmt.setString(2, token);
             pstmt.setString(3, email);
             pstmt.setString(4, id);
@@ -87,19 +87,18 @@ public class Database {
         }
     }
 
-    public Usuario selectUsuarioPorTelegramId(String telegramName){
-        System.out.println("USDERNQAMEEE " + telegramName);
-        String sql = "SELECT * FROM usuarios WHERE telegramName = ?";
+    public Usuario selectUsuarioPorTelegramId(int telegramId){
+        String sql = "SELECT * FROM usuarios WHERE telegramId = ?";
 
         Usuario usuario = new Usuario();
 
         try (PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, telegramName);
+            pstmt.setInt(1, telegramId);
             ResultSet rs  = pstmt.executeQuery();
 
             while (rs.next()) {
-                usuario.telegramUser = telegramName;
+                usuario.telegramId = telegramId;
                 usuario.token = rs.getString("token");
                 usuario.email = rs.getString("email");
                 usuario.id = rs.getString("id");
@@ -107,7 +106,6 @@ public class Database {
 
                 System.out.println("RESULTADO CONSULTA " + usuario.username);
                 return usuario;
-
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
