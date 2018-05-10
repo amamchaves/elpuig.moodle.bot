@@ -1,6 +1,6 @@
 package elpuig.moodle.bot.commands;
 
-import elpuig.moodle.bot.Usuario;
+import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.utils.Database;
 import org.telegram.telegrambots.api.methods.send.SendMessage;

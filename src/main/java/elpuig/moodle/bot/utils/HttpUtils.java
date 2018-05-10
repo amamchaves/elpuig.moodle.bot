@@ -10,6 +10,7 @@ public class HttpUtils {
     private static final String TAG = HttpUtils.class.getSimpleName();
 
     public static String get(String reqUrl) {
+        System.out.println("REQUEST URLLLL " + reqUrl);
         String response = null;
         try {
             URL url = new URL(reqUrl);

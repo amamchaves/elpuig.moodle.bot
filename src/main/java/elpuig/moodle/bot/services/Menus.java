@@ -1,5 +1,8 @@
 package elpuig.moodle.bot.services;
 
+import elpuig.moodle.bot.model.Course;
+import elpuig.moodle.bot.utils.MoodleAPI;
+import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import java.util.ArrayList;
@@ -118,42 +121,52 @@ public class Menus {
     }
 
     /* Crea el menu de buttons per escollir asignatures de DAM */
-    public static List<List<InlineKeyboardButton>> MenuInlineButtonsAssignaturesDAM() {
-        List<List<InlineKeyboardButton>> lkbDAM = new ArrayList<>();
+    public static List<List<InlineKeyboardButton>> MenuInlineButtonsAssignaturesDAM(User user) {
+        List<List<InlineKeyboardButton>> lkb = new ArrayList<>();
 
-        List<InlineKeyboardButton> row = new ArrayList<>();
-        List<InlineKeyboardButton> row2 = new ArrayList<>();
-        List<InlineKeyboardButton> row3 = new ArrayList<>();
+        List<Course> cursos = MoodleAPI.getCourses(user.getUserName());
 
-        row.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP03.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP03.toString()));
-        row.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP05.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP05.toString()));
-        row.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP06.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP06.toString()));
-        row2.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP07.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP07.toString()));
-        row2.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP08.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP08.toString()));
-        row2.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP09.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP09.toString()));
-        row3.add(new InlineKeyboardButton()
-                .setText(dataVars.ASSIGNATURES_DAM.MP13.toString())
-                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP13.toString()));
-        row3.add(new InlineKeyboardButton()
-                .setText("<---")
-                .setCallbackData("<---"));
-        lkbDAM.add(row);
-        lkbDAM.add(row2);
-        lkbDAM.add(row3);
+        for (Course course : cursos) {
+            List<InlineKeyboardButton> row = new ArrayList<>();
+            row.add(new InlineKeyboardButton()
+                    .setText(course.shortname)
+                    .setCallbackData(course.shortname));
+            lkb.add(row);
+        }
+//
+//        List<InlineKeyboardButton> row = new ArrayList<>();
+//        List<InlineKeyboardButton> row2 = new ArrayList<>();
+//        List<InlineKeyboardButton> row3 = new ArrayList<>();
+//
+//        row.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP03.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP03.toString()));
+//        row.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP05.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP05.toString()));
+//        row.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP06.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP06.toString()));
+//        row2.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP07.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP07.toString()));
+//        row2.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP08.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP08.toString()));
+//        row2.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP09.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP09.toString()));
+//        row3.add(new InlineKeyboardButton()
+//                .setText(dataVars.ASSIGNATURES_DAM.MP13.toString())
+//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP13.toString()));
+//        row3.add(new InlineKeyboardButton()
+//                .setText("<---")
+//                .setCallbackData("<---"));
+//        lkbDAM.add(row);
+//        lkbDAM.add(row2);
+//        lkbDAM.add(row3);
 
-        return lkbDAM;
+        return lkb;
 
     }
 

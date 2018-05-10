@@ -1,13 +1,13 @@
 package elpuig.moodle.bot.utils;
 
 
-import elpuig.moodle.bot.Usuario;
+import elpuig.moodle.bot.model.Usuario;
 
 import java.sql.*;
 
 public class Database {
     static final String url = "jdbc:sqlite:database.db";
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 7;
 
     static Database instance;
     static Connection conn;
@@ -19,6 +19,7 @@ public class Database {
             try {
                 conn = DriverManager.getConnection(url);
             } catch (SQLException e) {
+                System.out.println("Connection FAILEDDDDDDD");
                 System.out.println(e.getMessage());
             }
 
@@ -73,7 +74,7 @@ public class Database {
     }
 
     public void insertUsuario(String nombre, String token, String email, String id) {
-        String sql = "INSERT INTO usuarios(nombre, token) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO usuarios(telegramName, token, email, id) VALUES(?,?,?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nombre);
@@ -86,7 +87,8 @@ public class Database {
         }
     }
 
-    public Usuario selectUsuarioPorTelegramName(String telegramName){
+    public Usuario selectUsuarioPorTelegramId(String telegramName){
+        System.out.println("USDERNQAMEEE " + telegramName);
         String sql = "SELECT * FROM usuarios WHERE telegramName = ?";
 
         Usuario usuario = new Usuario();
@@ -102,6 +104,8 @@ public class Database {
                 usuario.email = rs.getString("email");
                 usuario.id = rs.getString("id");
                 usuario.username = rs.getString("username");
+
+                System.out.println("RESULTADO CONSULTA " + usuario.username);
                 return usuario;
 
             }

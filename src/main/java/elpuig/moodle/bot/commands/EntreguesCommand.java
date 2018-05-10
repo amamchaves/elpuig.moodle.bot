@@ -26,7 +26,8 @@ public class EntreguesCommand extends BotCommand {
         messageBuilder.append(Missatges.triaAsignatura).append("\n");
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM());
+        System.out.println("userrrrr " + user);
+        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM(user));
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());

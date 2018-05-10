@@ -1,7 +1,7 @@
 package elpuig.moodle.bot.commands;
 
 import elpuig.moodle.bot.Missatges;
-import elpuig.moodle.bot.Usuario;
+import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.utils.Database;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -29,7 +29,7 @@ public class ExamenCommand extends BotCommand {
         Usuario usuario = Database.get().selectUsuarioPorTelegramName(user.getUserName());
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM());
+        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM(user));
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());

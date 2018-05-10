@@ -1,12 +1,10 @@
 package elpuig.moodle.bot.commands;
 
-import elpuig.moodle.bot.Usuario;
-import elpuig.moodle.bot.services.Menus;
+import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.utils.Database;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
-import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.bots.AbsSender;
 import org.telegram.telegrambots.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
