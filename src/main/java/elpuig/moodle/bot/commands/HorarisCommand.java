@@ -26,7 +26,7 @@ public class HorarisCommand extends BotCommand {
 
         messageBuilder.append("Tria de qui vols veure horaris ").append("\n");
 
-        Usuario usuario = Database.get().selectUsuarioPorTelegramName(user.getUserName());
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsHoraris());

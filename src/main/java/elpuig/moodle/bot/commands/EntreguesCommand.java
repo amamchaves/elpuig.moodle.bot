@@ -2,7 +2,9 @@ package elpuig.moodle.bot.commands;
 
 
 import elpuig.moodle.bot.Missatges;
+import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.services.Menus;
+import elpuig.moodle.bot.utils.Database;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
@@ -25,8 +27,9 @@ public class EntreguesCommand extends BotCommand {
 
         messageBuilder.append(Missatges.triaAsignatura).append("\n");
 
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
+
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        System.out.println("userrrrr " + user);
         markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM(user));
 
         SendMessage answer = new SendMessage();

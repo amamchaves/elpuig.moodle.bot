@@ -26,7 +26,7 @@ public class ExamenCommand extends BotCommand {
 
         messageBuilder.append(Missatges.triaAsignatura).append("\n");
 
-        Usuario usuario = Database.get().selectUsuarioPorTelegramName(user.getUserName());
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM(user));

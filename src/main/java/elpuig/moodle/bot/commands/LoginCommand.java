@@ -1,10 +1,9 @@
 package elpuig.moodle.bot.commands;
 
 import elpuig.moodle.bot.Missatges;
-import elpuig.moodle.bot.utils.HttpUtils;
+import elpuig.moodle.bot.utils.Database;
 import elpuig.moodle.bot.utils.MoodleAPI;
 import elpuig.moodle.bot.utils.RAMDB;
-import org.json.JSONObject;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
@@ -28,8 +27,8 @@ public class LoginCommand extends BotCommand {
         String token = "";
 
         // busca el token de l'usuari
-        if(RAMDB.userTokens.containsKey(user.getUserName())){
-            token = RAMDB.userTokens.get(user.getUserName());
+        if(RAMDB.userTokens.containsKey(user.getId())){
+            token = RAMDB.userTokens.get(user.getId());
             messageBuilder.append(Missatges.loginActive);
 
         } else {
@@ -40,7 +39,7 @@ public class LoginCommand extends BotCommand {
             }else if(arguments.length >= 2) {
 
                 // emmagatzema l'usuari
-                int result = MoodleAPI.login(user.getUserName(), arguments[0], arguments[1]);
+                int result = MoodleAPI.login(user.getId(), arguments[0], arguments[1]);
 
                 if(result == 1){
                     messageBuilder.append(Missatges.loginOk);

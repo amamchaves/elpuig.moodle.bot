@@ -124,7 +124,7 @@ public class Menus {
     public static List<List<InlineKeyboardButton>> MenuInlineButtonsAssignaturesDAM(User user) {
         List<List<InlineKeyboardButton>> lkb = new ArrayList<>();
 
-        List<Course> cursos = MoodleAPI.getCourses(user.getUserName());
+        List<Course> cursos = MoodleAPI.getCourses(user.getId());
 
         for (Course course : cursos) {
             List<InlineKeyboardButton> row = new ArrayList<>();
