@@ -1,23 +1,24 @@
 package elpuig.moodle.bot;
 
 import elpuig.moodle.bot.commands.*;
-
+import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.services.Emoji;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.services.dataVars;
-
 import elpuig.moodle.bot.utils.MoodleAPI;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
+
+import java.util.List;
 
 public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
@@ -70,7 +71,6 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             } else if (update.hasCallbackQuery()) {
                 CallbackQuery callbackQuery = update.getCallbackQuery();
                 String tria = callbackQuery.getData();
-                //System.out.println(tria);
 
                 SendMessage answer = new SendMessage();
                 SendPhoto answerPhoto = new SendPhoto();
@@ -112,8 +112,16 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 //                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
                     default:
                         String[] partsTria = tria.split(":");
-                        //callbackQuery.getId();
-                        respondreText(answer, "estas las entregas ");
+                        String part1 = partsTria[0]; // tipus: entregues, examen, notes
+                        String part2 = partsTria[1]; // usuari
+
+                        System.out.println(part2);
+
+                        String id = callbackQuery.getId();
+                        System.out.println(id);
+
+                        respondreText(answer, "Aquestes són les entregues: \n");
+                        //buildStringEntregues(telegramId);
                 }
 
             }
@@ -162,6 +170,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             }
         }
 
+        /* Envia una resposta en forma de text */
         private void respondreText(SendMessage resp, String msg){
             resp.setText(msg);
             try {
@@ -171,10 +180,14 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             }
 
         }
-        /*
-        String buildStringEntregues(String telegramId, String courseId){
-            MoodleAPI.getCourses(telegramId);
-            // generar string con todas las asignaturas
+
+        /* Genera una cadena de text amb totes les entregues */
+        /*String buildStringEntregues(int telegramId){
+            List<Course> courses = MoodleAPI.getCourses(telegramId);
+
+            // buscar las entregas
+            String entreguesToString;
+            return  entreguesToString;
 
         }*/
 }

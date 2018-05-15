@@ -65,17 +65,18 @@ public class MoodleAPI {
         return courses;
 
     }
+/*
+    public static String[] getEntregues(int telegramId, String courseId){
 
-//    public static String[] getEntregues(id telegramId, String courseId){
-//
-//        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+token+"&courseids[0]="+id_assignatura+"&moodlewsrestformat=json");
-//
-//        JSONObject entregues = new JSONArray(response).getJSONObject(0).getJSONObject("assignments");
-//        //String id_entrega = entregues.getString("id");
-//        String nom_entrega = entregues.getString("name");
-//
-//         return ;
-//
-//    }
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
 
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]="+courseId+"&moodlewsrestformat=json");
+
+        JSONObject entregues = new JSONArray(response).getJSONObject(0).getJSONObject("assignments");
+        String nom_entrega = entregues.getString("name");
+
+         return ;
+
+    }
+*/
 }
