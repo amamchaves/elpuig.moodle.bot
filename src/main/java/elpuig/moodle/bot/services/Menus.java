@@ -130,7 +130,7 @@ public class Menus {
             List<InlineKeyboardButton> row = new ArrayList<>();
             row.add(new InlineKeyboardButton()
                     .setText(course.shortname)
-                    .setCallbackData(tipo + ":" + course.shortname));
+                    .setCallbackData(tipo + ":" + course.id + ":" + user.getId()));
             lkb.add(row);
         }
 //

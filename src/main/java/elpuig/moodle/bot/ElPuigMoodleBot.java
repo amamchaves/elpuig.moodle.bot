@@ -2,6 +2,7 @@ package elpuig.moodle.bot;
 
 import elpuig.moodle.bot.commands.*;
 import elpuig.moodle.bot.model.Course;
+import elpuig.moodle.bot.model.Entrega;
 import elpuig.moodle.bot.services.Emoji;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.services.dataVars;
@@ -18,6 +19,9 @@ import org.telegram.telegrambots.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
@@ -112,15 +116,15 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 //                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
                     default:
                         String[] partsTria = tria.split(":");
-                        String part1 = partsTria[0]; // tipus: entregues, examen, notes
-                        String part2 = partsTria[1]; // usuari
+                        String tipus = partsTria[0]; // tipus: entregues, examen, notes
+                        String courseId = partsTria[1]; // idcourse
+                        int uid = Integer.parseInt(partsTria[2]); // usuari
 
-                        System.out.println(part2);
+                        System.out.println("Tipus " +tipus);
+                        System.out.println("Course: " + courseId);
+                        System.out.println("Usuari " +uid);
 
-                        String id = callbackQuery.getId();
-                        System.out.println(id);
-
-                        respondreText(answer, "Aquestes són les entregues: \n");
+                        respondreText(answer, "Aquestes són les entregues: \n" + buildStringEntregues(uid, courseId));
                         //buildStringEntregues(telegramId);
                 }
 
@@ -174,6 +178,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         private void respondreText(SendMessage resp, String msg){
             resp.setText(msg);
             try {
+                resp.setParseMode("HTML");
                 sendMessage(resp);
             } catch (TelegramApiException e) {
                 BotLogger.info(LOGTAG, e.getMessage());
@@ -182,12 +187,20 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         }
 
         /* Genera una cadena de text amb totes les entregues */
-        /*String buildStringEntregues(int telegramId){
-            List<Course> courses = MoodleAPI.getCourses(telegramId);
+        String buildStringEntregues(int telegramId, String courseId){
 
-            // buscar las entregas
-            String entreguesToString;
-            return  entreguesToString;
+            List<Entrega> entregues = MoodleAPI.getEntregues(telegramId, courseId);
+            StringBuilder sb = new StringBuilder();
 
-        }*/
+            for(Entrega entrega : entregues){
+                //Instant instant = Instant.ofEpochSecond(entrega.duedate);
+                //LocalDateTime localDateTime = LocalDateTime.from(instant);
+                //String duedate = localDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                sb.append("\n<b>" + Emoji.CLIPBOARD + " "+ entrega.entreguesNom +  "</b> \n");
+                sb.append("Estat: " + entrega.entreguesEstat + " \n");
+                sb.append("Data d'entrega: "+ entrega.duedate +" \n");
+            }
+            return sb.toString();
+        }
 }

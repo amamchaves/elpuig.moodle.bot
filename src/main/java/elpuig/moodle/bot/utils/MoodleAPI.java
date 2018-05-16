@@ -1,6 +1,7 @@
 package elpuig.moodle.bot.utils;
 
 import elpuig.moodle.bot.model.Course;
+import elpuig.moodle.bot.model.Entrega;
 import elpuig.moodle.bot.model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,18 +66,29 @@ public class MoodleAPI {
         return courses;
 
     }
-/*
-    public static String[] getEntregues(int telegramId, String courseId){
+
+    public static List<Entrega> getEntregues(int telegramId, String courseId){
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
 
         String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]="+courseId+"&moodlewsrestformat=json");
 
-        JSONObject entregues = new JSONArray(response).getJSONObject(0).getJSONObject("assignments");
-        String nom_entrega = entregues.getString("name");
+        List<Entrega> entregues = new ArrayList<>();
 
-         return ;
+        JSONArray entreguesJSON = new JSONObject(response).getJSONArray("courses").getJSONObject(0).getJSONArray("assignments");
 
+        entreguesJSON.forEach(item -> {
+            JSONObject entregaJSON = (JSONObject) item;
+
+            Entrega entrega = new Entrega();
+            entrega.entreguesNom = entregaJSON.getString("name");
+            entrega.entreguesEstat = entregaJSON.getInt("completionsubmit");
+            entrega.duedate = entregaJSON.getInt("duedate");
+            entregues.add(entrega);
+
+        });
+
+        return entregues;
     }
-*/
+
 }

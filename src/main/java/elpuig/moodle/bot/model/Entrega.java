@@ -1,11 +1,10 @@
 package elpuig.moodle.bot.model;
 
-import java.util.List;
-
-public class Course {
+public class Entrega {
     public String id;
     public String shortname;
     public String fullname;
     public String entreguesNom;
-    public String entreguesEstat;
+    public int entreguesEstat;
+    public int duedate;
 }
