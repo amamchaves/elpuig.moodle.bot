@@ -193,13 +193,21 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             StringBuilder sb = new StringBuilder();
 
             for(Entrega entrega : entregues){
-                //Instant instant = Instant.ofEpochSecond(entrega.duedate);
-                //LocalDateTime localDateTime = LocalDateTime.from(instant);
-                //String duedate = localDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                Instant data = Instant.ofEpochSecond(entrega.duedate);
+                String dataString = data.toString();
+                String[] dataFormat = dataString.split("T");
+
+                String estat;
+                if(entrega.entreguesEstat == 1){
+                    estat="Entregat";
+                }
+                else{
+                    estat="No entregat";
+                }
 
                 sb.append("\n<b>" + Emoji.CLIPBOARD + " "+ entrega.entreguesNom +  "</b> \n");
-                sb.append("Estat: " + entrega.entreguesEstat + " \n");
-                sb.append("Data d'entrega: "+ entrega.duedate +" \n");
+                sb.append("Estat: " + estat + " \n");
+                sb.append("Data d'entrega: "+ dataFormat[0] +" \n");
             }
             return sb.toString();
         }
