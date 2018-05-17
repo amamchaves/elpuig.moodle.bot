@@ -84,6 +84,7 @@ public class MoodleAPI {
             entrega.entreguesNom = entregaJSON.getString("name");
             entrega.entreguesEstat = entregaJSON.getInt("completionsubmit");
             entrega.duedate = entregaJSON.getInt("duedate");
+            entrega.grade = entregaJSON.getInt("grade");
             entregues.add(entrega);
 
         });

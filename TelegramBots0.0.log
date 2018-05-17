@@ -7219,3 +7219,53 @@
 	at java.util.ArrayList.forEach(ArrayList.java:1249)
 	at org.telegram.telegrambots.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
 	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:311)
+[16_5_2018_17:27:25] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:29] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:33] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:38] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:42] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:46] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:27:50] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_17:39:30] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_20:29:57] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_20:30:5] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_20:30:9] {SEVERE} BOTSESSION - org.telegram.telegrambots.exceptions.TelegramApiRequestException: Error getting updates: [409] Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+	at org.telegram.telegrambots.api.methods.updates.GetUpdates.deserializeResponse(GetUpdates.java:119)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:262)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:191)
+[16_5_2018_20:39:57] {SEVERE} BOTSESSION - java.lang.ArrayIndexOutOfBoundsException: 1
+	at elpuig.moodle.bot.ElPuigMoodleBot.processNonCommandUpdate(ElPuigMoodleBot.java:120)
+	at org.telegram.telegrambots.bots.commandbot.TelegramLongPollingCommandBot.onUpdateReceived(TelegramLongPollingCommandBot.java:76)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.telegram.telegrambots.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:311)

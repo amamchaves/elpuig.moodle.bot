@@ -103,31 +103,37 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                     case "Dimecres":    enviarResposta(answerPhoto, dataVars.HPDimecres); break;
                     case "Dijous":  enviarResposta(answerPhoto, dataVars.HPDijous); break;
                     case "Divendres":   enviarResposta(answerPhoto, dataVars.HPDivendres); break;
-//                    case "SMX1A" :  enviarResposta(answerPhoto,dataVars.HSMX1A); break;
-//                    case "SMX1B":   enviarResposta(answerPhoto,dataVars.HSMX1B); break;
-//                    case "SMC1C":   enviarResposta(answerPhoto,dataVars.HSMX1C); break;
-//                    case "SMX2A":   enviarResposta(answerPhoto,dataVars.HSMX2A); break;
-//                    case "SMX2B":   enviarResposta(answerPhoto,dataVars.HSMX2B); break;
-//                    case "SMX2C":   enviarResposta(answerPhoto,dataVars.HSMX2C); break;
-//                    case "GS1B":    enviarResposta(answerPhoto,dataVars.HGS1B); break;
-//                    case "GS1A":    enviarResposta(answerPhoto,dataVars.HGS1A); break;
-//                    case "ASIX2":   enviarResposta(answerPhoto,dataVars.HASIX2A); break;
-//                    case "DAM2A":   enviarResposta(answerPhoto,dataVars.HDAM2A); break;
-//                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
+                    case "SMX1A" :  enviarResposta(answerPhoto,dataVars.HSMX1A); break;
+                    case "SMX1B":   enviarResposta(answerPhoto,dataVars.HSMX1B); break;
+                    case "SMC1C":   enviarResposta(answerPhoto,dataVars.HSMX1C); break;
+                    case "SMX2A":   enviarResposta(answerPhoto,dataVars.HSMX2A); break;
+                    case "SMX2B":   enviarResposta(answerPhoto,dataVars.HSMX2B); break;
+                    case "SMX2C":   enviarResposta(answerPhoto,dataVars.HSMX2C); break;
+                    case "GS1B":    enviarResposta(answerPhoto,dataVars.HGS1B); break;
+                    case "GS1A":    enviarResposta(answerPhoto,dataVars.HGS1A); break;
+                    case "ASIX2":   enviarResposta(answerPhoto,dataVars.HASIX2A); break;
+                    case "DAM2A":   enviarResposta(answerPhoto,dataVars.HDAM2A); break;
+                    case "DAM2B":   enviarResposta(answerPhoto,dataVars.HDAM2B); break;
                     default:
                         String[] partsTria = tria.split(":");
                         String tipus = partsTria[0]; // tipus: entregues, examen, notes
-                        String courseId = partsTria[1]; // idcourse
-                        int uid = Integer.parseInt(partsTria[2]); // usuari
+                        String courseId = partsTria[1];
+                        int uid = Integer.parseInt(partsTria[2]);
 
-                        System.out.println("Tipus " +tipus);
-                        System.out.println("Course: " + courseId);
-                        System.out.println("Usuari " +uid);
+                        System.out.println("Id Usuari: " +uid);
+                        System.out.println("Tipus: " +tipus);
+                        System.out.println("Curs: " + courseId);
 
-                        respondreText(answer, "Aquestes són les entregues: \n" + buildStringEntregues(uid, courseId));
-                        //buildStringEntregues(telegramId);
+                        if (tipus.equals("entregues")){
+                            System.out.println("Mostrant entregues...");
+                            respondreText(answer, "Aquestes són les entregues: \n" + buildStringEntregues(uid, courseId));
+                        }
+
+                        if (tipus.equals("examen")){
+                            System.out.println("Mostrant examens...");
+                            respondreText(answer, "Aquests són els examens: \n" + buildStringExamens(uid, courseId));
+                        }
                 }
-
             }
         }
 
@@ -193,22 +199,57 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             StringBuilder sb = new StringBuilder();
 
             for(Entrega entrega : entregues){
-                Instant data = Instant.ofEpochSecond(entrega.duedate);
-                String dataString = data.toString();
-                String[] dataFormat = dataString.split("T");
 
-                String estat;
-                if(entrega.entreguesEstat == 1){
-                    estat="Entregat";
-                }
-                else{
-                    estat="No entregat";
-                }
+                if (entrega.entreguesNom.contains("Examen") || entrega.entreguesNom.contains("Prova")) {
 
-                sb.append("\n<b>" + Emoji.CLIPBOARD + " "+ entrega.entreguesNom +  "</b> \n");
-                sb.append("Estat: " + estat + " \n");
-                sb.append("Data d'entrega: "+ dataFormat[0] +" \n");
+                }
+                else {
+                    Instant data = Instant.ofEpochSecond(entrega.duedate);
+                    String dataString = data.toString();
+                    String[] dataFormat = dataString.split("T");
+
+                    String estat;
+                    if (entrega.entreguesEstat == 1) {
+                        estat = "Entregat";
+                    } else {
+                        estat = "No entregat";
+                    }
+
+                    sb.append("\n<b>" + Emoji.CLIPBOARD + " " + entrega.entreguesNom + "</b> \n");
+                    sb.append("Data d'entrega: " + dataFormat[0] + " \n");
+                    sb.append("Estat: " + estat + " \n");
+                    sb.append("Nota: " + entrega.grade + " \n");
+                }
             }
             return sb.toString();
         }
+
+    /* Genera una cadena de text amb tots els examens */
+    String buildStringExamens(int telegramId, String courseId){
+
+        List<Entrega> entregues = MoodleAPI.getEntregues(telegramId, courseId);
+        StringBuilder sb = new StringBuilder();
+
+        for(Entrega entrega : entregues) {
+            Instant data = Instant.ofEpochSecond(entrega.duedate);
+            String dataString = data.toString();
+            String[] dataFormat = dataString.split("T");
+
+            String estat;
+            if (entrega.entreguesEstat == 1) {
+                estat = "Realitzat";
+            } else {
+                estat = "No realitzat";
+            }
+
+            if (entrega.entreguesNom.contains("Examen") || entrega.entreguesNom.contains("Prova")) {
+                System.out.println("Encontrado");
+                sb.append("\n<b>" + Emoji.HEAVY_EXCLAMATION_MARK_SYMBOL + " " + entrega.entreguesNom + "</b> \n");
+                sb.append("Data: " + dataFormat[0] + " \n");
+                sb.append("Estat: " + estat + " \n");
+                sb.append("Nota: " + entrega.grade + " \n");
+            }
+        }
+        return sb.toString();
+    }
 }
