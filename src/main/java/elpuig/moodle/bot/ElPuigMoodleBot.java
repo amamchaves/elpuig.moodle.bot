@@ -1,7 +1,6 @@
 package elpuig.moodle.bot;
 
 import elpuig.moodle.bot.commands.*;
-import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.model.Entrega;
 import elpuig.moodle.bot.services.Emoji;
 import elpuig.moodle.bot.services.Menus;
@@ -13,15 +12,12 @@ import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
-import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
@@ -200,7 +196,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
             for(Entrega entrega : entregues){
 
-                if (entrega.entreguesNom.contains("Examen") || entrega.entreguesNom.contains("Prova")) {
+                if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova")) {
 
                 }
                 else {
@@ -209,13 +205,13 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                     String[] dataFormat = dataString.split("T");
 
                     String estat;
-                    if (entrega.entreguesEstat == 1) {
+                    if (entrega.entregada == true) {
                         estat = "Entregat";
                     } else {
                         estat = "No entregat";
                     }
 
-                    sb.append("\n<b>" + Emoji.CLIPBOARD + " " + entrega.entreguesNom + "</b> \n");
+                    sb.append("\n<b>" + Emoji.CLIPBOARD + " " + entrega.nom + "</b> \n");
                     sb.append("Data d'entrega: " + dataFormat[0] + " \n");
                     sb.append("Estat: " + estat + " \n");
                     sb.append("Nota: " + entrega.grade + " \n");
@@ -236,15 +232,15 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             String[] dataFormat = dataString.split("T");
 
             String estat;
-            if (entrega.entreguesEstat == 1) {
+            if (entrega.entregada == true) {
                 estat = "Realitzat";
             } else {
                 estat = "No realitzat";
             }
 
-            if (entrega.entreguesNom.contains("Examen") || entrega.entreguesNom.contains("Prova")) {
+            if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova")) {
                 System.out.println("Encontrado");
-                sb.append("\n<b>" + Emoji.HEAVY_EXCLAMATION_MARK_SYMBOL + " " + entrega.entreguesNom + "</b> \n");
+                sb.append("\n<b>" + Emoji.HEAVY_EXCLAMATION_MARK_SYMBOL + " " + entrega.nom + "</b> \n");
                 sb.append("Data: " + dataFormat[0] + " \n");
                 sb.append("Estat: " + estat + " \n");
                 sb.append("Nota: " + entrega.grade + " \n");

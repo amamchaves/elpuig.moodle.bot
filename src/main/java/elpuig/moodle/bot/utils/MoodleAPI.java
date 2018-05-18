@@ -81,13 +81,33 @@ public class MoodleAPI {
             JSONObject entregaJSON = (JSONObject) item;
 
             Entrega entrega = new Entrega();
-            entrega.entreguesNom = entregaJSON.getString("name");
-            entrega.entreguesEstat = entregaJSON.getInt("completionsubmit");
+            entrega.id = entregaJSON.getInt("id");
+            entrega.nom = entregaJSON.getString("name");
+            //entrega.entregada = entregaJSON.getInt("completionsubmit");
             entrega.duedate = entregaJSON.getInt("duedate");
-            entrega.grade = entregaJSON.getInt("grade");
+            //entrega.grade = entregaJSON.getInt("grade");
             entregues.add(entrega);
 
         });
+
+        //Per cada entrega agafem l'id de la entrega i amb l'id busquem el grade
+        for (Entrega entrega : entregues) {
+            String response2 = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_submission_status&wstoken="+usuario.token+"&assignid="+entrega.id +"&moodlewsrestformat=json");
+
+            try {
+                new JSONObject(response2).getJSONObject("lastattempt").getJSONObject("submission");
+                entrega.entregada = true;
+            } catch (Exception e){
+                entrega.entregada = false;
+            }
+
+            try {
+                //Si no hi ha feedback, es que no està calificada
+                entrega.grade = new JSONObject(response2).getJSONObject("feedback").getJSONObject("grade").getString("grade");
+            } catch (Exception e){
+                entrega.grade = "Sense calificar";
+            }
+        }
 
         return entregues;
     }

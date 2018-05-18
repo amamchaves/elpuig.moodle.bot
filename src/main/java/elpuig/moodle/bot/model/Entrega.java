@@ -1,8 +1,9 @@
 package elpuig.moodle.bot.model;
 
 public class Entrega {
-    public String entreguesNom;
-    public int entreguesEstat;
+    public int id;
+    public String nom;
+    public boolean entregada;
     public int duedate;
-    public int grade;
+    public String grade;
 }
