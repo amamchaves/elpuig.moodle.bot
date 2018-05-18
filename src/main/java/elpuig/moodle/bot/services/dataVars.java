@@ -27,9 +27,4 @@ public class dataVars {
         SMX1A,SMX1B,SMX1C,SMX2A,SMX2B,SMX2C,GS1A,GS1B,DAM2A,DAM2B,ASIX2
     }
 
-    // Assignatures
-    public enum ASSIGNATURES_DAM {
-        MP03,MP05,MP06,MP07,MP08,MP09,MP10,MP13
-    }
-
 }

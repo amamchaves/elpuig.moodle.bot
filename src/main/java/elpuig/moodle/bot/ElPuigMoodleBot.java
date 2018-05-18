@@ -129,6 +129,12 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                             System.out.println("Mostrant examens...");
                             respondreText(answer, "Aquests són els examens: \n" + buildStringExamens(uid, courseId));
                         }
+                        /*
+                        if (tipus.equals("notes")){
+                            System.out.println("Mostrant notes...");
+                            respondreText(answer, "Aquestes són les notes: \n"+ buildStringEntregues(uid, courseId));
+
+                        }*/
                 }
             }
         }
@@ -196,7 +202,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
             for(Entrega entrega : entregues){
 
-                if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova")) {
+                if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova") || entrega.nom.contains("Notes"))  {
 
                 }
                 else {

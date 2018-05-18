@@ -133,38 +133,6 @@ public class Menus {
                     .setCallbackData(tipo + ":" + course.id + ":" + user.getId()));
             lkb.add(row);
         }
-//
-//        List<InlineKeyboardButton> row = new ArrayList<>();
-//        List<InlineKeyboardButton> row2 = new ArrayList<>();
-//        List<InlineKeyboardButton> row3 = new ArrayList<>();
-//
-//        row.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP03.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP03.toString()));
-//        row.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP05.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP05.toString()));
-//        row.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP06.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP06.toString()));
-//        row2.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP07.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP07.toString()));
-//        row2.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP08.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP08.toString()));
-//        row2.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP09.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP09.toString()));
-//        row3.add(new InlineKeyboardButton()
-//                .setText(dataVars.ASSIGNATURES_DAM.MP13.toString())
-//                .setCallbackData(dataVars.ASSIGNATURES_DAM.MP13.toString()));
-//        row3.add(new InlineKeyboardButton()
-//                .setText("<---")
-//                .setCallbackData("<---"));
-//        lkbDAM.add(row);
-//        lkbDAM.add(row2);
-//        lkbDAM.add(row3);
 
         return lkb;
 

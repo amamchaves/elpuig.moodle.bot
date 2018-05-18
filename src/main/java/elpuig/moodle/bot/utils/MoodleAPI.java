@@ -31,17 +31,6 @@ public class MoodleAPI {
         return 1;
     }
 
-//    public static String[] getCourses(String telegramUsername, String token){
-//
-//        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_course_get_courses&wstoken="+token+"&moodlewsrestformat=json");
-//
-//        JSONObject cursos = new JSONArray(response).getJSONObject(0);
-//        String id_curs = cursos.getString("id");
-//        String nom_curs = cursos.getString("fullname");
-//
-//
-//        return ;
-//    }
 
     public static List<Course> getCourses(int telegramId){
 
@@ -83,9 +72,7 @@ public class MoodleAPI {
             Entrega entrega = new Entrega();
             entrega.id = entregaJSON.getInt("id");
             entrega.nom = entregaJSON.getString("name");
-            //entrega.entregada = entregaJSON.getInt("completionsubmit");
             entrega.duedate = entregaJSON.getInt("duedate");
-            //entrega.grade = entregaJSON.getInt("grade");
             entregues.add(entrega);
 
         });
