@@ -17,6 +17,7 @@ import org.telegram.telegrambots.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
+import java.net.URL;
 import java.time.Instant;
 import java.util.List;
 
@@ -129,10 +130,10 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                             System.out.println("Mostrant examens...");
                             respondreText(answer, "Aquests són els examens: \n" + buildStringExamens(uid, courseId));
                         }
-                        /*
-                        if (tipus.equals("notes")){
+
+                        /*if (tipus.equals("notes")){
                             System.out.println("Mostrant notes...");
-                            respondreText(answer, "Aquestes són les notes: \n"+ buildStringEntregues(uid, courseId));
+                            respondreText(answer, "Aquestes són les notes: \n"+ buildNotes(uid, courseId));
 
                         }*/
                 }
@@ -201,8 +202,8 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             StringBuilder sb = new StringBuilder();
 
             for(Entrega entrega : entregues){
-
-                if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova") || entrega.nom.contains("Notes"))  {
+                System.out.println(entrega.nom + entrega.id);
+                if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova"))  {
 
                 }
                 else {
@@ -254,4 +255,5 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         }
         return sb.toString();
     }
+
 }

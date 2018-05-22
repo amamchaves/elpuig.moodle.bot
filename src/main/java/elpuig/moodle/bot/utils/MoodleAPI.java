@@ -2,10 +2,13 @@ package elpuig.moodle.bot.utils;
 
 import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.model.Entrega;
+import elpuig.moodle.bot.model.Notes;
 import elpuig.moodle.bot.model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +86,7 @@ public class MoodleAPI {
 
             try {
                 new JSONObject(response2).getJSONObject("lastattempt").getJSONObject("submission");
+
                 entrega.entregada = true;
             } catch (Exception e){
                 entrega.entregada = false;
@@ -91,6 +95,7 @@ public class MoodleAPI {
             try {
                 //Si no hi ha feedback, es que no està calificada
                 entrega.grade = new JSONObject(response2).getJSONObject("feedback").getJSONObject("grade").getString("grade");
+                //entrega.linkNotes = new JSONObject(response2).getJSONObject("feedback").getJSONArray("plugins").getJSONObject(1).getJSONArray("fileareas").getJSONObject(0).getJSONArray("files").get;
             } catch (Exception e){
                 entrega.grade = "Sense calificar";
             }
@@ -98,5 +103,21 @@ public class MoodleAPI {
 
         return entregues;
     }
+/*
+    public static List<Entrega> getNotes(int telegramId, String courseId){
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
+
+        //id de tutoria dam2 és 9
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]=9&moodlewsrestformat=json");
+        List<Entrega> notes = new ArrayList<>();
+
+
+
+
+        //192.168.22.138/moodle/pluginfile.php/136/assignfeedback_file/feedback_files/270/DAM-M9-UF3-Preguntes.pdf?forcedownload=1
+        //moodleUrl+"webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]=9&moodlewsrestformat=json";
+    }
+*/
+
 
 }

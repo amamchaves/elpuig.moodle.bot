@@ -6,4 +6,6 @@ public class Entrega {
     public boolean entregada;
     public int duedate;
     public String grade;
+
+    public String linkNotes;
 }
