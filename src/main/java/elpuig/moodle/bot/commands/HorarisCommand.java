@@ -24,7 +24,7 @@ public class HorarisCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Tria de qui vols veure horaris ").append("\n");
+        messageBuilder.append("Tria de qui vols veure horarissssss ").append("\n");
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 

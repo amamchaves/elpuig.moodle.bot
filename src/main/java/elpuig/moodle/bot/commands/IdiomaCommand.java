@@ -1,10 +1,9 @@
 package elpuig.moodle.bot.commands;
 
-
 import elpuig.moodle.bot.Missatges;
-import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.services.Menus;
-import elpuig.moodle.bot.utils.Database;
+import elpuig.moodle.bot.utils.MoodleAPI;
+import elpuig.moodle.bot.utils.RAMDB;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
@@ -14,23 +13,24 @@ import org.telegram.telegrambots.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
-public class EntreguesCommand extends BotCommand {
-    public static final String LOGTAG = "EXAMENCOMMAND";
+public class IdiomaCommand extends BotCommand {
 
-    public EntreguesCommand() {
-        super("entregues", "Obtens un llistat de les teves entregues");
+    public static final String LOGTAG = "IDIOMACOMMAND";
+
+    public IdiomaCommand() {
+        super("idioma", "Permet seleccionar l'idioma");
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append(Missatges.getString("triaAssignatura")).append("\n");
-
-        Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
+        messageBuilder.append("Tria l'idiomaaaaaa").append("\n");
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("entregues", user));
+        markup.setKeyboard(Menus.MenuInlineButtonsIdioma());
+
+        System.out.println("HOLAAAAA");
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
@@ -43,6 +43,4 @@ public class EntreguesCommand extends BotCommand {
             BotLogger.error(LOGTAG, e);
         }
     }
-
 }
-

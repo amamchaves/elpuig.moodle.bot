@@ -12,12 +12,16 @@ import org.telegram.telegrambots.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
+import java.time.LocalDate;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class LoginCommand extends BotCommand {
 
     public static final String LOGTAG = "LOGINCOMMAND";
 
     public LoginCommand() {
-        super("login", "Permet entrar l'usuari del Moodle");
+        super("login", "Permet entrar l'usuari del Moodle25222");
     }
 
     @Override
@@ -26,15 +30,17 @@ public class LoginCommand extends BotCommand {
 
         String token = "";
 
+
+
         // busca el token de l'usuari
         if(RAMDB.userTokens.containsKey(user.getId())){
             token = RAMDB.userTokens.get(user.getId());
-            messageBuilder.append(Missatges.loginActive);
+            messageBuilder.append(Missatges.getString("loginActive"));
 
         } else {
 
             if(arguments == null || arguments.length == 0) {
-                messageBuilder.append(Missatges.loginHelp);
+                messageBuilder.append(Missatges.getString("loginHelp"));
 
             }else if(arguments.length >= 2) {
 
@@ -44,9 +50,9 @@ public class LoginCommand extends BotCommand {
                 int result = MoodleAPI.login(user.getId(), arguments[0], arguments[1]);
 
                 if(result == 1){
-                    messageBuilder.append(Missatges.loginOk);
+                    messageBuilder.append(Missatges.getString("loginOk"));
                 }else{
-                    messageBuilder.append(Missatges.loginError);
+                    messageBuilder.append(Missatges.getString("loginError"));
                 }
 
             }

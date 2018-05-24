@@ -24,7 +24,7 @@ public class ExamenCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append(Missatges.triaAsignatura).append("\n");
+        messageBuilder.append(Missatges.getString("triaAsignatura")).append("\n");
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
