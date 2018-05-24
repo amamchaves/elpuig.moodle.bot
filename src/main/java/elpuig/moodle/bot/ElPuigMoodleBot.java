@@ -131,11 +131,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                             respondreText(answer, "Aquests són els examens: \n" + buildStringExamens(uid, courseId));
                         }
 
-                        /*if (tipus.equals("notes")){
-                            System.out.println("Mostrant notes...");
-                            respondreText(answer, "Aquestes són les notes: \n"+ buildNotes(uid, courseId));
 
-                        }*/
                 }
             }
         }
@@ -246,7 +242,6 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             }
 
             if (entrega.nom.contains("Examen") || entrega.nom.contains("Prova")) {
-                System.out.println("Encontrado");
                 sb.append("\n<b>" + Emoji.HEAVY_EXCLAMATION_MARK_SYMBOL + " " + entrega.nom + "</b> \n");
                 sb.append("Data: " + dataFormat[0] + " \n");
                 sb.append("Estat: " + estat + " \n");
@@ -255,5 +250,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         }
         return sb.toString();
     }
+
+
 
 }

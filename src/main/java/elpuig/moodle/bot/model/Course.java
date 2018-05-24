@@ -6,6 +6,4 @@ public class Course {
     public String id;
     public String shortname;
     public String fullname;
-    public String entreguesNom;
-    public String entreguesEstat;
 }

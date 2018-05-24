@@ -2,13 +2,16 @@ package elpuig.moodle.bot.utils;
 
 import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.model.Entrega;
-import elpuig.moodle.bot.model.Notes;
 import elpuig.moodle.bot.model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,29 +98,54 @@ public class MoodleAPI {
             try {
                 //Si no hi ha feedback, es que no està calificada
                 entrega.grade = new JSONObject(response2).getJSONObject("feedback").getJSONObject("grade").getString("grade");
-                //entrega.linkNotes = new JSONObject(response2).getJSONObject("feedback").getJSONArray("plugins").getJSONObject(1).getJSONArray("fileareas").getJSONObject(0).getJSONArray("files").get;
+                entrega.linkNotes = new JSONObject(response2).getJSONObject("feedback").getJSONArray("plugins").getJSONObject(1).getJSONArray("fileareas").getJSONObject(0).getJSONArray("files").getJSONObject(0).getString("fileurl");
+                System.out.println(entrega.linkNotes);
             } catch (Exception e){
                 entrega.grade = "Sense calificar";
+                entrega.linkNotes = "No disponibles";
+            }
+
+            //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"+entrega.linkNotes);
+        }
+
+        return entregues;
+    }
+
+    public static List<Entrega> getNotes(int telegramId, String courseId){
+
+        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
+
+        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]="+courseId+"&moodlewsrestformat=json");
+
+        List<Entrega> entregues = new ArrayList<>();
+
+        JSONArray entreguesJSON = new JSONObject(response).getJSONArray("courses").getJSONObject(0).getJSONArray("assignments");
+
+        entreguesJSON.forEach(item -> {
+            JSONObject entregaJSON = (JSONObject) item;
+
+            Entrega entrega = new Entrega();
+            entrega.id = entregaJSON.getInt("id");
+            entrega.nom = entregaJSON.getString("name");
+            entrega.duedate = entregaJSON.getInt("duedate");
+            entregues.add(entrega);
+
+        });
+
+        //Per cada entrega agafem l'id de la entrega i amb l'id busquem el grade
+        for (Entrega entrega : entregues) {
+            String response2 = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_submission_status&wstoken="+usuario.token+"&assignid="+entrega.id +"&moodlewsrestformat=json");
+
+            try {
+                entrega.linkNotes = new JSONObject(response2).getJSONObject("feedback").getJSONArray("plugins").getJSONObject(2).getJSONArray("fileareas").getJSONObject(0).getJSONArray("files").getJSONObject(0).getString("fileurl");
+                entrega.linkNotes = entrega.linkNotes.replace("pluginfile.php", "pluginfile.php?file=");
+                entrega.linkNotes += "&token=" + usuario.token;
+                System.out.println(entrega.linkNotes);
+            } catch (Exception e){
+                entrega.linkNotes = "No disponibles";
             }
         }
 
         return entregues;
     }
-/*
-    public static List<Entrega> getNotes(int telegramId, String courseId){
-        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
-
-        //id de tutoria dam2 és 9
-        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]=9&moodlewsrestformat=json");
-        List<Entrega> notes = new ArrayList<>();
-
-
-
-
-        //192.168.22.138/moodle/pluginfile.php/136/assignfeedback_file/feedback_files/270/DAM-M9-UF3-Preguntes.pdf?forcedownload=1
-        //moodleUrl+"webservice/rest/server.php?wsfunction=mod_assign_get_assignments&wstoken="+usuario.token+"&courseids[0]=9&moodlewsrestformat=json";
-    }
-*/
-
-
 }
