@@ -36,6 +36,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             register(new ExamenCommand());
             register(new NotesCommand());
             register(new LoginCommand());
+            register(new IdiomaCommand());
             HelpCommand helpCommand = new HelpCommand(this);
             register(helpCommand);
 
@@ -190,6 +191,16 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                 BotLogger.info(LOGTAG, e.getMessage());
             }
 
+        }
+
+        void establirIdioma(String idioma){
+            System.out.println("ESTOY AQUI");
+
+            if(idioma.equals("catala")){
+                Missatges.seleccionarIdioma("ca", "CA");
+            } else {
+                Missatges.seleccionarIdioma("es", "ES");
+            }
         }
 
         /* Genera una cadena de text amb totes les entregues */

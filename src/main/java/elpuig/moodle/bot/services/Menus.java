@@ -143,4 +143,19 @@ public class Menus {
 
     }
 
+
+    public static List<List<InlineKeyboardButton>> MenuInlineButtonsIdioma() {
+        List<List<InlineKeyboardButton>> lkbIdioma2 = new ArrayList<>();
+        List<InlineKeyboardButton> row = new ArrayList<>();
+
+        row.add(new InlineKeyboardButton()
+                .setText("Castellano")
+                .setCallbackData("Castellano"));
+        row.add(new InlineKeyboardButton()
+                .setText("Català")
+                .setCallbackData("Català"));
+        lkbIdioma2.add(row);
+
+        return lkbIdioma2;
+    }
 }
