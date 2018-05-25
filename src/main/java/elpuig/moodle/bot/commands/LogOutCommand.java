@@ -12,38 +12,18 @@ import org.telegram.telegrambots.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
-public class LoginCommand extends BotCommand {
+public class LogOutCommand extends BotCommand {
 
     public static final String LOGTAG = "LOGINCOMMAND";
 
-    public LoginCommand() {
-        super("login", "Permet entrar l'usuari del Moodle");
+    public LogOutCommand() {
+        super("logout", "Permet sortir l'usuari del Moodle");
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        String token = "";
-
-
-        if (arguments == null || arguments.length == 0) {
-            messageBuilder.append(Missatges.loginHelp);
-
-        } else if (arguments.length >= 2) {
-
-            // emmagatzema l'usuari
-            System.out.println(user.getUserName() + " " + user.getId());
-
-            int result = MoodleAPI.login(user.getId(), arguments[0], arguments[1]);
-
-            if (result == 1) {
-                messageBuilder.append(Missatges.loginOk);
-            } else {
-                messageBuilder.append(Missatges.loginError);
-            }
-
-        }
 
 
         SendMessage answer = new SendMessage();

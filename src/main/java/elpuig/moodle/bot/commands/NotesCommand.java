@@ -29,12 +29,7 @@ public class NotesCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Llistat de notes ").append("\n");
-
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
-
-//        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-//        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("notes", user));
 
         String tutoriaId = "";
         for(Course course: MoodleAPI.getCourses(user.getId())){
@@ -46,9 +41,8 @@ public class NotesCommand extends BotCommand {
 
         for(Entrega entrega : MoodleAPI.getNotes(user.getId(), tutoriaId)){
             if(entrega.nom.contains("Notes") ) {
-                System.out.println(entrega.nom + entrega.linkNotes);
-                messageBuilder.append("\n<b>" + Emoji.CLIPBOARD + " " + entrega.nom + "</b> \n");
-                messageBuilder.append("Nota: " + entrega.linkNotes + " \n");
+                messageBuilder.append("\n" + Emoji.HUNDRED_POINTS_SYMBOL + " " + entrega.nom + " \n");
+                messageBuilder.append(entrega.linkNotes + " \n\n");
             }
         }
 

@@ -127,11 +127,16 @@ public class Menus {
         List<Course> cursos = MoodleAPI.getCourses(user.getId());
 
         for (Course course : cursos) {
-            List<InlineKeyboardButton> row = new ArrayList<>();
-            row.add(new InlineKeyboardButton()
-                    .setText(course.shortname)
-                    .setCallbackData(tipo + ":" + course.id + ":" + user.getId()));
-            lkb.add(row);
+            if(course.fullname.toLowerCase().contains("tutoria")){
+
+            }
+            else {
+                List<InlineKeyboardButton> row = new ArrayList<>();
+                row.add(new InlineKeyboardButton()
+                        .setText(course.shortname)
+                        .setCallbackData(tipo + ":" + course.id + ":" + user.getId()));
+                lkb.add(row);
+            }
         }
 
         return lkb;

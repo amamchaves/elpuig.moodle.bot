@@ -23,17 +23,34 @@ public class MoodleAPI {
 
         String response = HttpUtils.get(moodleUrl + "login/token.php?username=" + username + "&password=" + password + "&service=moodle_mobile_app");
 
-        String token = new JSONObject(response).getString("token");
+        try {
+            String token = new JSONObject(response).getString("token");
 
-        response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_user_get_users_by_field&wstoken="+token+"&field=username&values[0]="+username+"&moodlewsrestformat=json");
+            response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_user_get_users_by_field&wstoken=" + token + "&field=username&values[0]=" + username + "&moodlewsrestformat=json");
 
-        JSONObject jsonObject = new JSONArray(response).getJSONObject(0);
+            JSONObject jsonObject = new JSONArray(response).getJSONObject(0);
 
-        String email = jsonObject.getString("email");
-        String id = String.valueOf(jsonObject.getInt("id"));
+            String email = jsonObject.getString("email");
+            String id = String.valueOf(jsonObject.getInt("id"));
 
-        Database.get().insertUsuario(telegramId, username, token, email, id);
+            Database.get().insertUsuario(telegramId, username, token, email, id);
+        } catch (Exception e){
+            return 0;
+        }
+        return 1;
+    }
 
+    public static int logout(int telegramId, String username, String password){
+
+        String response = HttpUtils.get(moodleUrl + "login/token.php?username=" + username + "&password=" + password + "&service=moodle_mobile_app");
+
+        try {
+            //Database.get(). (telegramId, username, token, email, id);
+
+
+        } catch (Exception e){
+            return 0;
+        }
         return 1;
     }
 
@@ -98,14 +115,10 @@ public class MoodleAPI {
             try {
                 //Si no hi ha feedback, es que no està calificada
                 entrega.grade = new JSONObject(response2).getJSONObject("feedback").getJSONObject("grade").getString("grade");
-                entrega.linkNotes = new JSONObject(response2).getJSONObject("feedback").getJSONArray("plugins").getJSONObject(1).getJSONArray("fileareas").getJSONObject(0).getJSONArray("files").getJSONObject(0).getString("fileurl");
-                System.out.println(entrega.linkNotes);
             } catch (Exception e){
                 entrega.grade = "Sense calificar";
-                entrega.linkNotes = "No disponibles";
             }
 
-            //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"+entrega.linkNotes);
         }
 
         return entregues;
