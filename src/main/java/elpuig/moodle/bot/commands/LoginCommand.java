@@ -26,7 +26,6 @@ public class LoginCommand extends BotCommand {
 
         String token = "";
 
-
         if (arguments == null || arguments.length == 0) {
             messageBuilder.append(Missatges.loginHelp);
 
@@ -44,7 +43,6 @@ public class LoginCommand extends BotCommand {
             }
 
         }
-
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());

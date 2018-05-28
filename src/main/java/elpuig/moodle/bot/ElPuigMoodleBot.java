@@ -36,6 +36,7 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
             register(new ExamenCommand());
             register(new NotesCommand());
             register(new LoginCommand());
+            register(new LogOutCommand());
             register(new IdiomaCommand());
             HelpCommand helpCommand = new HelpCommand(this);
             register(helpCommand);

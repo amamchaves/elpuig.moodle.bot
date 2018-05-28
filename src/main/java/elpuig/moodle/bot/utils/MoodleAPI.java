@@ -40,14 +40,9 @@ public class MoodleAPI {
         return 1;
     }
 
-    public static int logout(int telegramId, String username, String password){
-
-        String response = HttpUtils.get(moodleUrl + "login/token.php?username=" + username + "&password=" + password + "&service=moodle_mobile_app");
-
+    public static int logout(int telegramId, String username){
         try {
-            //Database.get(). (telegramId, username, token, email, id);
-
-
+            Database.get().deleteUsuario(username);
         } catch (Exception e){
             return 0;
         }

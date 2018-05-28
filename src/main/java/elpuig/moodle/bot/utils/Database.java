@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class Database {
     static final String url = "jdbc:sqlite:database.db";
-    static final int DATABASE_VERSION = 9;
+    static final int DATABASE_VERSION = 11;
 
     static Database instance;
     static Connection conn;
@@ -83,6 +83,19 @@ public class Database {
             pstmt.setString(4, email);
             pstmt.setString(5, id);
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteUsuario(String username) {
+        String sql = "DELETE FROM usuarios WHERE username = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            //pstmt.setString(1, username);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
