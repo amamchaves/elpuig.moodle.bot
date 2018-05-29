@@ -1,6 +1,7 @@
 package elpuig.moodle.bot.commands;
 
 import elpuig.moodle.bot.Missatges;
+import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.utils.MoodleAPI;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
@@ -13,6 +14,8 @@ import org.telegram.telegrambots.logging.BotLogger;
 public class LogOutCommand extends BotCommand {
 
     public static final String LOGTAG = "LOGOUTCOMMAND";
+    public static final Usuario usuari = new Usuario();
+
 
     public LogOutCommand() {
         super("logout", "Permet sortir l'usuari del Moodle");
@@ -23,16 +26,17 @@ public class LogOutCommand extends BotCommand {
         StringBuilder messageBuilder = new StringBuilder();
 
         if (arguments == null || arguments.length == 0) {
-            messageBuilder.append(Missatges.logoutHelp);
+            messageBuilder.append(Missatges.Idioma.logoutHelp);
 
         } else if (arguments.length >= 1) {
 
             int result = MoodleAPI.logout(user.getId(), arguments[0]);
 
             if (result == 1) {
-                messageBuilder.append(Missatges.logoutOk);
+                messageBuilder.append(Missatges.Idioma.logoutOk);
+
             } else {
-                messageBuilder.append(Missatges.logoutError);
+                messageBuilder.append(Missatges.Idioma.logoutError);
             }
         }
 

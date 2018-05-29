@@ -25,17 +25,17 @@ public class IdiomaCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Tria l'idiomaaaaaa").append("\n");
+        messageBuilder.append("Tria l'idioma").append("\n");
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsIdioma());
 
-        System.out.println("HOLAAAAA");
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageBuilder.toString());
         answer.setReplyMarkup(markup);
+
 
         try {
             absSender.sendMessage(answer);

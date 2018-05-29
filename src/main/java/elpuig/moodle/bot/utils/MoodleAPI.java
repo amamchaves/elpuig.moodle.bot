@@ -1,5 +1,7 @@
 package elpuig.moodle.bot.utils;
 
+import com.fasterxml.jackson.databind.introspect.ClassIntrospector;
+import elpuig.moodle.bot.Missatges;
 import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.model.Entrega;
 import elpuig.moodle.bot.model.Usuario;
@@ -51,26 +53,27 @@ public class MoodleAPI {
 
 
     public static List<Course> getCourses(int telegramId){
+        StringBuilder messageBuilder = new StringBuilder();
 
-        Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
+            Usuario usuario = Database.get().selectUsuarioPorTelegramId(telegramId);
 
-        String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_enrol_get_users_courses&wstoken="+usuario.token+"&userid="+usuario.id+"&moodlewsrestformat=json");
+            String response = HttpUtils.get(moodleUrl + "webservice/rest/server.php?wsfunction=core_enrol_get_users_courses&wstoken=" + usuario.token + "&userid=" + usuario.id + "&moodlewsrestformat=json");
 
 
-        List<Course> courses = new ArrayList<>();
+            List<Course> courses = new ArrayList<>();
 
-        new JSONArray(response).forEach(item -> {
-            JSONObject courseJSON = (JSONObject) item;
+            new JSONArray(response).forEach(item -> {
+                JSONObject courseJSON = (JSONObject) item;
 
-            Course course = new Course();
-            course.fullname = courseJSON.getString("fullname");
-            course.shortname = courseJSON.getString("shortname");
-            course.id = String.valueOf(courseJSON.getInt("id"));
-            courses.add(course);
+                Course course = new Course();
+                course.fullname = courseJSON.getString("fullname");
+                course.shortname = courseJSON.getString("shortname");
+                course.id = String.valueOf(courseJSON.getInt("id"));
+                courses.add(course);
 
-        });
+            });
 
-        return courses;
+            return courses;
 
     }
 

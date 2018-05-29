@@ -23,15 +23,21 @@ public class ExamenCommand extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
+        StringBuilder messageBuilder2 = new StringBuilder();
+        SendMessage answer = new SendMessage();
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+
+
+        try{
 
         messageBuilder.append(Missatges.getString("triaAsignatura")).append("\n");
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        //InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("examen", user));
 
-        SendMessage answer = new SendMessage();
+        //SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageBuilder.toString());
         answer.setReplyMarkup(markup);
@@ -40,6 +46,19 @@ public class ExamenCommand extends BotCommand {
             absSender.sendMessage(answer);
         } catch (TelegramApiException e) {
             BotLogger.error(LOGTAG, e);
+        }
+        }catch (Exception e){
+
+            messageBuilder2.append(Missatges.getString("loginHelp")).append("\n");
+
+            answer.setChatId(chat.getId().toString());
+            answer.setText(messageBuilder2.toString());
+            answer.setReplyMarkup(markup);
+            try {
+                absSender.sendMessage(answer);
+            } catch (TelegramApiException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

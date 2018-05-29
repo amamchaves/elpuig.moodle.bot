@@ -1,5 +1,6 @@
 package elpuig.moodle.bot.commands;
 
+import elpuig.moodle.bot.Missatges;
 import elpuig.moodle.bot.model.Course;
 import elpuig.moodle.bot.model.Entrega;
 import elpuig.moodle.bot.model.Usuario;
@@ -28,7 +29,11 @@ public class NotesCommand extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
+        StringBuilder messageBuilder2 = new StringBuilder();
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        SendMessage answer = new SendMessage();
 
+        try{
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 
         String tutoriaId = "";
@@ -48,7 +53,7 @@ public class NotesCommand extends BotCommand {
 
 
 
-        SendMessage answer = new SendMessage();
+        //SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageBuilder.toString());
 
@@ -56,6 +61,19 @@ public class NotesCommand extends BotCommand {
             absSender.sendMessage(answer);
         } catch (TelegramApiException e) {
             BotLogger.error(LOGTAG, e);
+        }
+        }catch (Exception e){
+
+            messageBuilder2.append(Missatges.getString("loginHelp")).append("\n");
+
+            answer.setChatId(chat.getId().toString());
+            answer.setText(messageBuilder2.toString());
+            answer.setReplyMarkup(markup);
+            try {
+                absSender.sendMessage(answer);
+            } catch (TelegramApiException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

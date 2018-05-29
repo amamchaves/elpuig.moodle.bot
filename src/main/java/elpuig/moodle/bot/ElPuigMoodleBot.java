@@ -86,6 +86,14 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
 
                 switch (tria) {
+                    case "Català":
+                        markup.setKeyboard(Menus.MenuInlineButtonsIdioma());
+                        establirIdioma("catala");
+                        break;
+                    case "Castellano":
+                        markup.setKeyboard(Menus.MenuInlineButtonsIdioma());
+                        establirIdioma("castellano");
+                        break;
                     case "Professors":
                         markup.setKeyboard(Menus.MenuInlineButtonsHorarisProfes());
                         enviarResposta(callbackQuery, markup, "Tria els horaris de:");
@@ -265,7 +273,5 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         }
         return sb.toString();
     }
-
-
 
 }

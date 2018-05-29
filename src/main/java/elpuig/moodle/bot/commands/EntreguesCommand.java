@@ -17,6 +17,7 @@ import org.telegram.telegrambots.logging.BotLogger;
 public class EntreguesCommand extends BotCommand {
     public static final String LOGTAG = "EXAMENCOMMAND";
 
+
     public EntreguesCommand() {
         super("entregues", "Obtens un llistat de les teves entregues");
     }
@@ -24,25 +25,46 @@ public class EntreguesCommand extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
-
-        messageBuilder.append(Missatges.getString("triaAssignatura")).append("\n");
-
-        Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
-
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("entregues", user));
-
+        StringBuilder messageBuilder2 = new StringBuilder();
         SendMessage answer = new SendMessage();
-        answer.setChatId(chat.getId().toString());
-        answer.setText(messageBuilder.toString());
-        answer.setReplyMarkup(markup);
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+
 
         try {
-            absSender.sendMessage(answer);
-        } catch (TelegramApiException e) {
-            BotLogger.error(LOGTAG, e);
+            messageBuilder.append(Missatges.getString("triaAsignatura")).append("\n");
+
+            Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
+
+            //InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+            markup.setKeyboard(Menus.MenuInlineButtonsAssignaturesDAM("entregues", user));
+
+            //SendMessage answer = new SendMessage();
+            answer.setChatId(chat.getId().toString());
+            answer.setText(messageBuilder.toString());
+            answer.setReplyMarkup(markup);
+
+
+            try {
+                absSender.sendMessage(answer);
+            } catch (TelegramApiException e) {
+                BotLogger.error(LOGTAG, e);
+            }
+        }catch (Exception e){
+
+            messageBuilder2.append(Missatges.getString("loginHelp")).append("\n");
+
+            answer.setChatId(chat.getId().toString());
+            answer.setText(messageBuilder2.toString());
+            answer.setReplyMarkup(markup);
+            try {
+                absSender.sendMessage(answer);
+            } catch (TelegramApiException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
 }
+
+
 

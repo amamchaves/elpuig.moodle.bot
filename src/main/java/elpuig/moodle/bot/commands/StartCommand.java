@@ -19,19 +19,13 @@ public class StartCommand extends BotCommand {
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        // DatabaseManager databseManager = DatabaseManager.getInstance();
         StringBuilder messageBuilder = new StringBuilder();
 
-        String userName = user.getFirstName();// + " " + user.getLastName();
+        String userName = user.getFirstName();
 
-        //if (databseManager.getUserStateForCommandsBot(user.getId())) {
         messageBuilder.append("Benvingut "+userName).append("\n");
-        messageBuilder.append("Aquest és el bot de proves de El Puig");
-        // } else {
-        //     databseManager.setUserStateForCommandsBot(user.getId(), true);
-        //     messageBuilder.append("Welcome ").append(userName).append("\n");
-        //    messageBuilder.append("this bot will demonstrate you the command feature of the Java TelegramBots API!");
-        //}
+        messageBuilder.append("Aquest és el bot del Puig");
+
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());

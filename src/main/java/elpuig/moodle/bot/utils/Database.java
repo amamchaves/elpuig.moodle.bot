@@ -92,7 +92,7 @@ public class Database {
         String sql = "DELETE FROM usuarios WHERE username = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            //pstmt.setString(1, username);
+            pstmt.setString(1, username);
             // execute the delete statement
             pstmt.executeUpdate();
 
