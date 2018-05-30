@@ -203,8 +203,6 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
         }
 
         void establirIdioma(String idioma){
-            System.out.println("ESTOY AQUI");
-
             if(idioma.equals("catala")){
                 Missatges.seleccionarIdioma("ca", "CA");
             } else {
