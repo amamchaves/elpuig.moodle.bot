@@ -17,7 +17,7 @@ public class ExamenCommand extends BotCommand {
     public static final String LOGTAG = "EXAMENCOMMAND";
 
     public ExamenCommand() {
-        super("examens", "Obtens un llistat dels teus examens");
+        super("examens", Missatges.getString("LlistaExamens"));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ExamenCommand extends BotCommand {
 
         try{
 
-        messageBuilder.append(Missatges.getString("triaAsignatura")).append("\n");
+        messageBuilder.append(Missatges.getString("LlistaExamens")).append("\n");
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 

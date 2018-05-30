@@ -18,7 +18,7 @@ public class LogOutCommand extends BotCommand {
 
 
     public LogOutCommand() {
-        super("logout", "Permet sortir l'usuari del Moodle");
+        super("logout", Missatges.getString("logout"));
     }
 
     @Override
@@ -26,17 +26,17 @@ public class LogOutCommand extends BotCommand {
         StringBuilder messageBuilder = new StringBuilder();
 
         if (arguments == null || arguments.length == 0) {
-            messageBuilder.append(Missatges.Idioma.logoutHelp);
+            messageBuilder.append(Missatges.getString("logOutHelp"));
 
         } else if (arguments.length >= 1) {
 
             int result = MoodleAPI.logout(user.getId(), arguments[0]);
 
             if (result == 1) {
-                messageBuilder.append(Missatges.Idioma.logoutOk);
+                messageBuilder.append(Missatges.getString("logOutOk"));
 
             } else {
-                messageBuilder.append(Missatges.Idioma.logoutError);
+                messageBuilder.append(Missatges.getString("logOutError"));
             }
         }
 

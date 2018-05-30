@@ -134,12 +134,12 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
                         if (tipus.equals("entregues")){
                             System.out.println("Mostrant entregues...");
-                            respondreText(answer, "Aquestes són les entregues: \n" + buildStringEntregues(uid, courseId));
+                            respondreText(answer, Missatges.getString("LlistaEntregas") + buildStringEntregues(uid, courseId));
                         }
 
                         if (tipus.equals("examen")){
                             System.out.println("Mostrant examens...");
-                            respondreText(answer, "Aquests són els examens: \n" + buildStringExamens(uid, courseId));
+                            respondreText(answer, Missatges.getString("LlistaExamens") + buildStringExamens(uid, courseId));
                         }
 
 
@@ -235,9 +235,9 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
                     }
 
                     sb.append("\n<b>" + Emoji.CLIPBOARD + " " + entrega.nom + "</b> \n");
-                    sb.append("Data d'entrega: " + dataFormat[0] + " \n");
-                    sb.append("Estat: " + estat + " \n");
-                    sb.append("Nota: " + gradeFormat[0] + " \n");
+                    sb.append(Missatges.getString("DataEntrega")+":" + dataFormat[0] + " \n");
+                    sb.append(Missatges.getString("Estat")+": " + estat + " \n");
+                    sb.append(Missatges.getString("Nota")+": " + gradeFormat[0] + " \n");
                 }
             }
             return sb.toString();
@@ -264,9 +264,9 @@ public class ElPuigMoodleBot extends TelegramLongPollingCommandBot {
 
             if (entrega.nom.toLowerCase().contains("examen") || entrega.nom.toLowerCase().contains("prova")) {
                 sb.append("\n<b>" + Emoji.HEAVY_EXCLAMATION_MARK_SYMBOL + " " + entrega.nom + "</b> \n");
-                sb.append("Data: " + dataFormat[0] + " \n");
-                sb.append("Estat: " + estat + " \n");
-                sb.append("Nota: " + gradeFormat[0] + " \n");
+                sb.append(Missatges.getString("DataEntrega")+":"+ dataFormat[0] + " \n");
+                sb.append(Missatges.getString("Estat")+": " + estat + " \n");
+                sb.append(Missatges.getString("Nota")+": " + gradeFormat[0] + " \n");
             }
         }
         return sb.toString();

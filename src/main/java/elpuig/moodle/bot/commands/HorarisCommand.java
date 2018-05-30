@@ -1,5 +1,6 @@
 package elpuig.moodle.bot.commands;
 
+import elpuig.moodle.bot.Missatges;
 import elpuig.moodle.bot.model.Usuario;
 import elpuig.moodle.bot.services.Menus;
 import elpuig.moodle.bot.utils.Database;
@@ -17,14 +18,14 @@ public class HorarisCommand extends BotCommand {
 
 
     public HorarisCommand() {
-        super("horaris", "Obtens els horaris de grups i professors");
+        super("horaris", Missatges.getString("Veurehoraris"));
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Tria de qui vols veure horaris ").append("\n");
+        messageBuilder.append(Missatges.getString("Veurehoraris")).append("\n");
 
         Usuario usuario = Database.get().selectUsuarioPorTelegramId(user.getId());
 

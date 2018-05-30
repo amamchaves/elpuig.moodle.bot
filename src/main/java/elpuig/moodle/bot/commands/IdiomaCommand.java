@@ -18,14 +18,14 @@ public class IdiomaCommand extends BotCommand {
     public static final String LOGTAG = "IDIOMACOMMAND";
 
     public IdiomaCommand() {
-        super("idioma", "Permet seleccionar l'idioma");
+        super("idioma", Missatges.getString("TriaIdioma"));
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        messageBuilder.append("Tria l'idioma").append("\n");
+        messageBuilder.append(Missatges.getString("TriaIdioma")).append("\n");
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(Menus.MenuInlineButtonsIdioma());

@@ -1,5 +1,6 @@
 package elpuig.moodle.bot.commands;
 
+import elpuig.moodle.bot.Missatges;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.User;
@@ -15,7 +16,7 @@ public class HelpCommand extends BotCommand {
     private final ICommandRegistry commandRegistry;
 
     public HelpCommand(ICommandRegistry commandRegistry) {
-        super("help", "Llista totes les comandes del bot");
+        super("help", Missatges.getString("ComandesBot"));
         this.commandRegistry = commandRegistry;
     }
 
@@ -27,7 +28,7 @@ public class HelpCommand extends BotCommand {
         }*/
 
         StringBuilder helpMessageBuilder = new StringBuilder("<b>Help</b>\n");
-        helpMessageBuilder.append("Aquesta és la llista de comandes del bot:\n\n");
+        helpMessageBuilder.append(Missatges.getString("LlistaComandes2"));
 
         for (BotCommand botCommand : commandRegistry.getRegisteredCommands()) {
             helpMessageBuilder.append(botCommand.toString()).append("\n");

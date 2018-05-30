@@ -19,7 +19,7 @@ public class LoginCommand extends BotCommand {
     public static final Usuario usuari = new Usuario();
 
     public LoginCommand() {
-        super("login", "Permet entrar l'usuari del Moodle");
+        super("login", Missatges.getString("login"));
     }
 
     @Override
